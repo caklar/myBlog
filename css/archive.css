@@ -1,0 +1,51 @@
+.main {
+    width: 700px;
+    margin: 96px auto 96px;
+    /* border-top: 1px solid #e3e3e3; */
+}
+
+.archive {
+    position: relative;
+    margin-left: 80px;
+}
+
+.archive::before {
+    content: "";
+    position: absolute;
+    left: -32px;
+    width: 4px;
+    height: 100%;
+    background-color: #e3e3e3;
+}
+
+.title {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0;
+    border-bottom: 1px dotted #555;
+}
+
+.title:hover {
+    border-bottom: 1px solid #444;
+}
+
+.title::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -34px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background-color: #999;
+}
+
+.title:hover::before {
+    background-color: #444;
+}
+
+.time {
+    margin-right: 48px;
+    font-size: 12px;
+}
