@@ -1,0 +1,17 @@
+.main {
+    width: 600px;
+    margin: 96px auto;
+    /* border-top: 1px solid #e3e3e3; */
+    text-align: center;
+}
+
+.tips {
+    margin: 0 6px 6px;
+    border-bottom: 1px dotted #555;
+    color: #555;
+    font-size: 16px;
+}
+
+.tips:hover {
+    border-bottom: 1px solid #444;
+}

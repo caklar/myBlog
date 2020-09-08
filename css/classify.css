@@ -1,0 +1,15 @@
+.main {
+    width: 600px;
+    margin: 96px auto;
+    /* border-top: 1px solid #e3e3e3; */
+}
+
+.entry {
+    display: inline-block;
+    margin-bottom: 6px;
+    border-bottom: 1px dotted #555;
+}
+
+.entry:hover {
+    border-bottom: 1px solid #444;
+}
