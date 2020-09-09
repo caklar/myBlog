@@ -9,7 +9,8 @@ app.use(router)
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '123698745'    
+    password: '123698745',
+    database: 'blog'    
 })
 
 db.connect(function(err) {
