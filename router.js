@@ -1,7 +1,7 @@
-var fs = require('fs')
-var express = require('express')
+const fs = require('fs')
+const express = require('express')
 
-var router = express.Router()
+const router = express.Router()
 
 // 跳转首页
 router.get('/', function (req, res) {
