@@ -1,0 +1,12 @@
+.article {
+    width: 700px;
+    margin: 96px auto;
+}
+
+.article-topic {
+    text-align: center;
+}
+
+.article-message {
+    text-align: center;
+}

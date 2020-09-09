@@ -1,31 +1,40 @@
 .main {
-    width: 1210px;
+    width: 1420px;
     margin: 96px auto 96px;
     /* border-top: 1px solid #e3e3e3; */
 }
 
-.article {
+.article-nav {
     float: left;
     width: 800px;
+    margin-left: 192px;
     /* border-top: 1px solid gray; */
 }
 
-.intro {
+.article-nav-inner {
     margin-left: 192px;
+    margin-bottom: 64px;
+    padding: 36px;
+}
+
+.article-nav-inner:hover {
+    border: 1px solid #555;
+    box-shadow: 3px 3px 6px -2px #888;
 }
 
 .more {
     border-bottom: 1px solid #555;
 }
 
-.aside {
+.message {
     float: right;
-    width: 300px;
+    width: 256px;
     margin-left: 96px;
+    padding: 16px;
     /* border-top: 1px solid black; */
 }
 
-.contain {
+.content {
     margin-bottom: 96px;
     overflow: hidden;
 }
