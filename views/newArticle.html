@@ -5,8 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/newArticle.css">
+    <link rel="stylesheet" href="../node_modules/editor.md/css/editormd.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
 </head>
 <body>
-    
+    <div>
+        <form action="/newArticle" method="POST">
+            <div class="new-message">
+                <div class="new-topic">
+                    <span>标题</span>
+                    <input type="text" placeholder="在此输入标题" name="topic">
+                </div>
+                <div class="new-classify">
+                    <span>分类</span>
+                    <input type="text" name="classify">
+                </div>
+                <div class="new-tag">
+                    <span>标签</span>
+                    <input type="text" placeholder="在此输入标签,多个标签以半角逗号隔开" name="tag">
+                </div>
+            </div>
+            
+            <div id="editor">
+                <textarea style="display:none;">
+        
+                </textarea>
+            </div>
+            
+            <div class="submit">
+                <button>确认发表</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="../node_modules/editor.md/editormd.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var editor = editormd("editor", {
+                width  : "90%",
+                height : "530px",
+                path   : "../node_modules/editor.md/lib/"
+            });
+        });
+    </script>
 </body>
 </html>
