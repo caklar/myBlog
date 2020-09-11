@@ -1,5 +1,7 @@
 const fs = require('fs')
 const express = require('express')
+var operation = require('./operation')
+const { now } = require('jquery')
 
 const router = express.Router()
 
@@ -56,6 +58,37 @@ router.get('/about', function (req, res) {
             res.end(data)
         }
     })
+})
+
+// 跳转关于页面
+router.get('/a', function (req, res) {
+    fs.readFile('./views/newArticle.html', 'utf8', function (err, data) {
+        if (err) {
+            return res.status(500).send('error')
+        } else {
+            res.end(data)
+        }
+    })
+})
+
+// 新建文章提交
+router.post('/newArticle', function (req,res) {
+    // 获取并格式化当前时间
+    let nowDate = new Date();
+    let year = nowDate.getFullYear()
+    let month = nowDate.getMonth() + 1
+    month = month > 10 ? month : '0' + month
+    let day = nowDate.getDate()
+    day = day > 10 ? day : '0' + day
+    nowDate = year + '-' + month + '-' + day
+    // 提取数据
+    let article = []
+    article[0] = req.body.topic
+    article[1] = req.body['editor-markdown-doc']
+    article[2] = nowDate
+    // 提交操作
+    operation.newArticle(article, req.body.classify, req.body.tag)
+    res.redirect('/')
 })
 
 // 公开指定目录
