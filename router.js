@@ -1,7 +1,6 @@
 const fs = require('fs')
 const express = require('express')
 var operation = require('./operation')
-const { now } = require('jquery')
 
 const router = express.Router()
 
@@ -60,7 +59,7 @@ router.get('/about', function (req, res) {
     })
 })
 
-// 跳转关于页面
+// 
 router.get('/a', function (req, res) {
     fs.readFile('./views/newArticle.html', 'utf8', function (err, data) {
         if (err) {
@@ -68,6 +67,18 @@ router.get('/a', function (req, res) {
         } else {
             res.end(data)
         }
+    })
+})
+
+router.get('/article/:id', function (req, res) {
+    let id = req.params.id
+    operation.getArticle(id, function (message) {
+        res.render('article.html', {
+            topic: message.article_topic,
+            content: message.article_content,
+            date: message.article_date,
+            className: message.class_name
+        });
     })
 })
 
