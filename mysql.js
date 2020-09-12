@@ -14,11 +14,11 @@ var query = function (sql, data, callback) {
         if (err) {
             callback(err);
         } else {
-            connection.query(sql, data, function (qerr, vals, fields) {
+            connection.query(sql, data, function (qerr, back) {
                 // 释放连接
                 connection.release();
                 // 事件驱动回调
-                // callback(qerr, vals, fields);
+                callback(qerr, back);
             });
         }
     });
