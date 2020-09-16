@@ -5,22 +5,23 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '123698745',
-    database: 'blog'
+    database: 'blog',
+    multipleStatements: true
 })
 
 // 操作
 var query = function (sql, data, callback) {
     pool.getConnection(function (err, connection) {
         if (err) {
-            callback(err);
+            callback(err)
         } else {
             connection.query(sql, data, function (qerr, back) {
-                // 释放连接
-                connection.release();
                 // 事件驱动回调
-                callback(qerr, back);
+                callback(qerr, back)
             });
         }
+        // 释放连接
+        pool.releaseConnection(connection)
     });
 };
 
