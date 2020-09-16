@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/public.css">
-    <link rel="stylesheet" href="../css/archive.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/css/archive.css">
 </head>
 <body>
     <div>
@@ -24,21 +24,40 @@
 
         <div class="archive">
             <div class="archive-inner">
-                <h1 class="years">2020</h1>
+                {{ if type == 'archive' }}
+                {{ each year t }}
+                <h1>{{ t.years }}</h1>
                 <ul>
+                    {{ each archive mes }}
+                    {{ if mes.article_date.slice(0,4) == t.years }}
                     <li>
-                        <a href="" class="title"><span class="time">09-08</span>123</a>
+                        <a href="/article/{{ mes.article_id }}" class="title"><span class="time">{{ mes.article_date }}</span>{{ mes.article_topic }}</a>
                     </li>
-                    <li><a href="" class="title">123</a></li>
-                    <li><a href="" class="title">123</a></li>
-                    <li><a href="" class="title">123</a></li>
-                    <li><a href="" class="title">123</a></li>
-                    <li><a href="" class="title">123</a></li>
-                    <li><a href="" class="title">123</a></li>
-                    <li><a href="" class="title">123</a></li>
-                    <li><a href="" class="title">123</a></li>
-                    <li><a href="" class="title">123</a></li>
+                    {{ /if }}
+                    {{ /each }}
                 </ul>
+                {{ /each }}
+                {{ else if type == 'article_c' }}
+                <h1>{{ belong.class_name }}</h1>
+                <span>分类</span>
+                <ul>
+                    {{ each mes }}
+                    <li>
+                        <a href="/article/{{ $value.article_id }}" class="title"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a>
+                    </li>
+                    {{ /each }}
+                </ul>
+                {{ else if type == 'article_t'}}
+                <h1>{{ belong.tag_name }}</h1>
+                <span>标签</span>
+                <ul>
+                    {{ each mes }}
+                    <li>
+                        <a href="/article/{{ $value.article_id }}" class="title"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a>
+                    </li>
+                    {{ /each }}
+                </ul>
+                {{ /if }}
             </div>
         </div>
 
