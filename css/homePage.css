@@ -14,7 +14,7 @@
 .article-nav-inner {
     margin-left: 192px;
     margin-bottom: 64px;
-    padding: 36px;
+    padding: 18px 36px;
 }
 
 .article-nav-inner:hover {
@@ -22,8 +22,19 @@
     box-shadow: 3px 3px 6px -2px #888;
 }
 
+.article-nav-content{
+    margin-bottom: 24px;
+}
+
 .more {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #777;
+    color: #777;
+}
+
+.more:hover{
     border-bottom: 1px solid #555;
+    color: #555;
 }
 
 .message {
@@ -35,22 +46,46 @@
 }
 
 .content {
-    margin-bottom: 96px;
+    /* margin-bottom: 96px; */
     overflow: hidden;
 }
 
 .paging {
-    width: 220px;
+    width: 600px;
     margin: 0 auto;
     text-align: center;
+}
+
+.paging-inner {
+    border-top: 1px solid #e3e3e3;
 }
 
 .paging-inner li {
     display: inline-block;
     width: 30px;
-    height: 30px;
+    height: 40px;
     margin: 0 5px;
-    background-color: #e3e3e3;
-    line-height: 30px;
+    line-height: 40px;
     text-align: center;
+}
+
+.paging-inner a {
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    border-top: 1px solid #e3e3e3;
+    color: #555;
+    transition: border-top 0.2s linear;
+}
+
+.paging-inner a:hover {
+    border-top: 1px solid #555;
+}
+
+.paging-inner .currentPage {
+    pointer-events: none;
+    background-color: #e3e3e3;
+    color: #888;
 }
