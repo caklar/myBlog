@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/public.css">
-    <link rel="stylesheet" href="../css/tag.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/css/tag.css">
 </head>
 <body>
     <div>
@@ -23,26 +23,9 @@
         </div>
 
         <div class="tag">
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
-            <a href="" class="tips">123</a>
+            {{ each tag }}
+                <a href="/tag/{{ $value.tag_id }}" class="tips">{{ $value.tag_name }}</a>
+            {{ /each }}
         </div>
 
         <div class="footer">
