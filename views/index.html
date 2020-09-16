@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/public.css">
-    <link rel="stylesheet" href="../css/homePage.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/css/homePage.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/js/index.js"></script>
 </head>
 <body>
     <div>
@@ -25,11 +27,13 @@
         <div class="main">
             <div class="content">
                 <div class="article-nav">
+                    {{ each article }}
                     <div class="article-nav-inner">
-                        <h1 class="topic">123</h1>
-                        <p class="article-nav-content">123456</p>
-                        <a href="" class="more">123 >></a>
+                        <h1 class="topic">{{ $value.article_topic }}</h1>
+                        <p class="article-nav-content">{{ $value.article_content }}</p>
+                        <a href="article/{{ $value.article_id }}" class="more">阅读全文 >></a>
                     </div>
+                    {{ /each }}
                 </div>
                 
                 <div class="message">
@@ -45,9 +49,14 @@
 
             <div class="paging">
                 <ul class="paging-inner">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
+                    <li><a href="" id="first">&lt;&lt;</a></li>
+                    <li><a href="" id="prev">&lt;</a></li>
+                    <li><a href="" class="currentPage page">1</a></li>
+                    <li><a href="#" class="page">2</a></li>
+                    <li><a href="" class="page">3</a></li>
+                    <li>···</li>
+                    <li><a href="" id="next">&gt;</a></li>
+                    <li><a href="" id="last">&gt;&gt;</a></li>
                 </ul>
             </div>
         </div>
