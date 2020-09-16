@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/public.css">
-    <link rel="stylesheet" href="../css/classify.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/css/classify.css">
 </head>
 <body>
     <div>
@@ -24,16 +24,9 @@
 
         <div class="classify">
             <ul>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
-                <li><a href="" class="entry">123</a></li>
+                {{ each class_info }}
+                    <li><a href="/classify/{{ $value.class_id }}" class="entry">{{ $value.class_name }}</a></li>
+                {{ /each }}
             </ul>
         </div>
 
