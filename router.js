@@ -6,50 +6,97 @@ const router = express.Router()
 
 // 跳转首页
 router.get('/', function (req, res) {
-    fs.readFile('./views/index.html', 'utf8', function (err, data) {
-        if (err) {
-            return res.status(500).send('error')
-        } else {
-            res.end(data)
-        }
+    // 首页分页为 1
+    operation.getArticlePage(1, function (message) {
+        res.render('index.html', {
+            article: message
+        });
+    })
+})
+
+// 文章分页跳转
+router.get('/article/page/:pageNum', function (req, res) {
+    // 获取要跳转的分页号
+    let pageNum = req.params.pageNum
+    operation.getArticlePage(pageNum, function (message) {
+        res.render('index.html', {
+            article: message
+        })
+    })
+})
+
+// 跳转到文章页面
+router.get('/article/:id', function (req, res) {
+    // 获取文章 id
+    let id = req.params.id
+    operation.getOneArticle(id, function (message) {
+        res.render('article.html', {
+            topic: message[0][0].article_topic,
+            content: message[0][0].article_content,
+            date: message[0][0].article_date,
+            className: message[0][0].class_name
+        });
     })
 })
 
 // 跳转分类页面
 router.get('/classify', function (req, res) {
-    fs.readFile('./views/classify.html', 'utf8', function (err, data) {
-        if (err) {
-            return res.status(500).send('error')
-        } else {
-            res.end(data)
-        }
+    operation.getClass(1, function (message) {
+        res.render(`classify.html`, {
+            class_info: message
+        })
+    })
+})
+
+// 跳转分类文章界面
+router.get('/classify/:id', function (req, res) {
+    // 获取分类 id
+    let id = req.params.id
+    operation.getArticleC(id, function (message) {
+        res.render(`archive.html`, {
+            type: 'article_c',
+            mes: message[0],
+            belong: message[1][0]
+        })
     })
 })
 
 // 跳转归档界面
 router.get('/archive', function (req, res) {
-    fs.readFile('./views/archive.html', 'utf8', function (err, data) {
-        if (err) {
-            return res.status(500).send('error')
-        } else {
-            res.end(data)
-        }
+    operation.getArchive(1, function (message) {
+        res.render(`archive.html`, {
+            type: 'archive',
+            archive: message[0],
+            year: message[1].reverse()
+        })
     })
 })
 
 // 跳转标签页面
 router.get('/tag', function (req, res) {
-    fs.readFile('./views/tag.html', 'utf8', function (err, data) {
-        if (err) {
-            return res.status(500).send('error')
-        } else {
-            res.end(data)
-        }
+    operation.getTag(function (message) {
+        res.render(`tag.html`, {
+            tag: message
+        })
+    })
+})
+
+// 跳转标签文章界面
+router.get('/tag/:id', function (req, res) {
+    // 获取标签 id
+    let id = req.params.id
+    operation.getArticleT(id, function (message) {
+        res.render(`archive.html`, {
+            type: 'article_t',
+            mes: message[0],
+            belong: message[1][0]
+        })
     })
 })
 
 // 跳转关于页面
 router.get('/about', function (req, res) {
+    // 跳转到指定文章
     fs.readFile('./views/index.html', 'utf8', function (err, data) {
         if (err) {
             return res.status(500).send('error')
@@ -67,18 +114,6 @@ router.get('/a', function (req, res) {
         } else {
             res.end(data)
         }
-    })
-})
-
-router.get('/article/:id', function (req, res) {
-    let id = req.params.id
-    operation.getArticle(id, function (message) {
-        res.render('article.html', {
-            topic: message.article_topic,
-            content: message.article_content,
-            date: message.article_date,
-            className: message.class_name
-        });
     })
 })
 
@@ -104,6 +139,7 @@ router.post('/newArticle', function (req,res) {
 
 // 公开指定目录
 router.use('/css/', express.static('./css/'))
+router.use('/js/', express.static('./js/'))
 router.use('/node_modules/', express.static('./node_modules/'))
 
 module.exports = router
