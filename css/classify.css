@@ -8,6 +8,7 @@
     display: inline-block;
     margin-bottom: 6px;
     border-bottom: 1px dotted #555;
+    color: #555;
 }
 
 .entry:hover {
