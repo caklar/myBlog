@@ -8,31 +8,27 @@ exports.newArticle = function (article, classify, tag) {
         if (err) {
             console.log(err.message)
         }
-        console.log('1')
-    })
-    // 插入文章信息
-    const insert_a = `INSERT INTO article(article_topic,article_content,article_date,article_del,class_id) VALUES(?,?,?,'0',(SELECT MAX(class_id) FROM classify))`
-    query(insert_a, article, function (err, res) {
-        if (err) {
-            console.log(err.message)
-        }
-        console.log('2')
-    })
-    // 插入标签信息
-    const insert_t = `INSERT INTO tag(tag_name,tag_del) VALUES(?,'0')`
-    query(insert_t, tag, function (err, res) {
-        if (err) {
-            console.log(err.message)
-        }
-        console.log('3')
-    })
-    // 插入文章和标签映射信息
-    const insert_a_t = `INSERT INTO a_t(article_id,tag_id) VALUES((SELECT MAX(article_id) FROM article),(SELECT MAX(tag_id) FROM tag))`
-    query(insert_a_t, tag, function (err, res) {
-        if (err) {
-            console.log(err.message)
-        }
-        console.log('4')
+        // 插入文章信息
+        const insert_a = `INSERT INTO article(article_topic,article_content,article_date,article_del,class_id) VALUES(?,?,?,'0',(SELECT MAX(class_id) FROM classify))`
+        query(insert_a, article, function (err, res) {
+            if (err) {
+                console.log(err.message)
+            }
+            // 插入标签信息
+            const insert_t = `INSERT INTO tag(tag_name,tag_del) VALUES(?,'0')`
+            query(insert_t, tag, function (err, res) {
+                if (err) {
+                    console.log(err.message)
+                }
+                // 插入文章和标签映射信息
+                const insert_a_t = `INSERT INTO a_t(article_id,tag_id) VALUES((SELECT MAX(article_id) FROM article),(SELECT MAX(tag_id) FROM tag))`
+                query(insert_a_t, tag, function (err, res) {
+                    if (err) {
+                        console.log(err.message)
+                    }
+                })
+            })
+        })
     })
 }
 
@@ -41,7 +37,7 @@ exports.getOneArticle = function (id, callback) {
     // 查询文章信息及其分类
     const a_c = `SELECT article.*,classify.* FROM article,classify WHERE article_id=` + id + ` AND article.class_id=classify.class_id`
     // 查询文章标签信息
-    const a_t = `SELECT tag.tag_name FROM tag,article,a_t WHERE article.article_id=` + id + ` AND article.article_id=a_t.article_id AND a_t.tag_id=tag.tag_id`
+    const a_t = `SELECT tag.tag_name, tag.tag_id FROM tag,article,a_t WHERE article.article_id=` + id + ` AND article.article_id=a_t.article_id AND a_t.tag_id=tag.tag_id`
     const sql = a_c + `;` + a_t
 
     query(sql, function (err, res) {
@@ -58,12 +54,23 @@ exports.getArticlePage = function (pageNum, callback) {
     // 文章查询的起始位置
     start = (pageNum - 1) * 10
     // 查询文章信息及其分类
-    const sql = `SELECT article.*,classify.class_name FROM article,classify WHERE article.class_id=classify.class_id ORDER BY article_date DESC LIMIT ` + start + `,` + 10
-
+    const onePage = `SELECT article.*,classify.class_name FROM article,classify WHERE article.class_id=classify.class_id ORDER BY article_date DESC LIMIT ` + start + `,` + 10
+    const totalPage = `SELECT COUNT(article_id) AS pageCount FROM article`
+    const sql = onePage + `;` + totalPage
+    
     query(sql, function (err, res) {
         if (err) {
             console.log(err.message)
         } else {
+            // 获取总页数
+            let page = res[1][0].pageCount
+            page = page % 10 == 0 ? page / 10 : Math.ceil(page / 10)
+            // 将页数转换为数组，方便前端模板渲染
+            const totalPages = []
+            for (let i = 0; i < page; i++) {
+                totalPages.push(i)
+            }
+            res[1] = totalPages
             // console.log(res)
             callback(res)
         }
