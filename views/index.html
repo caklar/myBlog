@@ -16,9 +16,9 @@
             <div class="header-inner">
                 <ul class="nav">
                     <li><a href="/">首页</a></li>
-                    <li><a href="/classify">分类(123)</a></li>
-                    <li><a href="/archive">归档(123)</a></li>
-                    <li><a href="/tag">标签(123)</a></li>
+                    <li><a href="/classify">分类</a></li>
+                    <li><a href="/archive">归档</a></li>
+                    <li><a href="/tag">标签</a></li>
                     <li><a href="/about">关于</a></li>
                 </ul>
             </div>
@@ -31,7 +31,7 @@
                     <div class="article-nav-inner">
                         <h1 class="topic">{{ $value.article_topic }}</h1>
                         <p class="article-nav-content">{{ $value.article_content }}</p>
-                        <a href="article/{{ $value.article_id }}" class="more">阅读全文 >></a>
+                        <a href="/article/{{ $value.article_id }}" class="more">阅读全文 >></a>
                     </div>
                     {{ /each }}
                 </div>
@@ -51,10 +51,32 @@
                 <ul class="paging-inner">
                     <li><a href="" id="first">&lt;&lt;</a></li>
                     <li><a href="" id="prev">&lt;</a></li>
-                    <li><a href="" class="currentPage page">1</a></li>
-                    <li><a href="#" class="page">2</a></li>
-                    <li><a href="" class="page">3</a></li>
+                    {{ if pageNum > 5 }}
+                    <li><a href="" class="page">1</a></li>
                     <li>···</li>
+                    {{ /if }}
+                    {{ each totalPages }}
+                        {{ if $value + 1 == pageNum }}
+                        <li><a href="" class="currentPage page">{{ $value + 1 }}</a></li>
+                        {{ else }}
+                            {{ if pageNum > 5 && $value > 4 }}
+                                {{ if $value == pageNum || $value == pageNum - 2 }}
+                                    <li><a href="" class="page">{{ $value + 1 }}</a></li>
+                                {{ /if }}
+                            {{ else }}
+                                {{ if $value > pageNum }}
+                                {{ else }}
+                                    <li><a href="" class="page">{{ $value + 1 }}</a></li>
+                                {{ /if }}
+                            {{ /if }}
+                        {{ /if }}
+                    {{ /each }}
+                    {{ if totalPages.length - pageNum > 2 }}
+                        <li>···</li>
+                        <li><a href="" class="page">{{ totalPages.length }}</a></li>
+                    {{ else if totalPages.length - pageNum == 2 }}
+                        <li><a href="" class="page">{{ totalPages.length }}</a></li>
+                    {{ /if }}
                     <li><a href="" id="next">&gt;</a></li>
                     <li><a href="" id="last">&gt;&gt;</a></li>
                 </ul>
