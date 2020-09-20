@@ -9,8 +9,10 @@ router.get('/', function (req, res) {
     // 首页分页为 1
     operation.getArticlePage(1, function (message) {
         res.render('index.html', {
-            article: message
-        });
+            article: message[0],
+            totalPages : message[1],
+            pageNum: 1
+        })
     })
 })
 
@@ -19,8 +21,11 @@ router.get('/article/page/:pageNum', function (req, res) {
     // 获取要跳转的分页号
     let pageNum = req.params.pageNum
     operation.getArticlePage(pageNum, function (message) {
+        // console.log(message[1])
         res.render('index.html', {
-            article: message
+            article: message[0],
+            totalPages : message[1],
+            pageNum: pageNum
         })
     })
 })
@@ -34,7 +39,8 @@ router.get('/article/:id', function (req, res) {
             topic: message[0][0].article_topic,
             content: message[0][0].article_content,
             date: message[0][0].article_date,
-            className: message[0][0].class_name
+            className: message[0][0].class_name,
+            tags: message[1]
         });
     })
 })
@@ -130,7 +136,7 @@ router.post('/newArticle', function (req,res) {
     // 提取数据
     let article = []
     article[0] = req.body.topic
-    article[1] = req.body['editor-markdown-doc']
+    article[1] = req.body['editor-html-code']
     article[2] = nowDate
     // 提交操作
     operation.newArticle(article, req.body.classify, req.body.tag)
