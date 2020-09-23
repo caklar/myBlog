@@ -20,6 +20,7 @@ router.get('/', function (req, res) {
 router.get('/article/page/:pageNum', function (req, res) {
     // 获取要跳转的分页号
     let pageNum = req.params.pageNum
+
     operation.getArticlePage(pageNum, function (message) {
         // console.log(message[1])
         res.render('index.html', {
@@ -34,13 +35,15 @@ router.get('/article/page/:pageNum', function (req, res) {
 router.get('/article/:id', function (req, res) {
     // 获取文章 id
     let id = req.params.id
+
     operation.getOneArticle(id, function (message) {
         res.render('article.html', {
             topic: message[0][0].article_topic,
             content: message[0][0].article_content,
             date: message[0][0].article_date,
             className: message[0][0].class_name,
-            tags: message[1]
+            class_id: message[0][0].class_id,
+            tags: message[1],
         });
     })
 })
@@ -58,11 +61,34 @@ router.get('/classify', function (req, res) {
 router.get('/classify/:id', function (req, res) {
     // 获取分类 id
     let id = req.params.id
-    operation.getArticleC(id, function (message) {
+
+    operation.getArticleC(id, 1, function (message) {
         res.render(`archive.html`, {
             type: 'article_c',
             mes: message[0],
-            belong: message[1][0]
+            belong: message[1][0],
+            totalPages: message[2],
+            pageNum: 1,
+            route: '/classify/' + id
+        })
+    })
+})
+
+// 分类文章分页
+router.get('/classify/:id/page/:pageNum', function (req, res) {
+    // 获取分类 id
+    let id = req.params.id
+    // 获取页码
+    let pageNum = req.params.pageNum
+
+    operation.getArticleC(id, pageNum, function (message) {
+        res.render(`archive.html`, {
+            type: 'article_c',
+            mes: message[0],
+            belong: message[1][0],
+            totalPages: message[2],
+            pageNum: pageNum,
+            route: '/classify/' + id
         })
     })
 })
@@ -73,7 +99,26 @@ router.get('/archive', function (req, res) {
         res.render(`archive.html`, {
             type: 'archive',
             archive: message[0],
-            year: message[1].reverse()
+            year: message[1],
+            totalPages : message[2],
+            pageNum: 1,
+            route: '/archive'
+        })
+    })
+})
+
+// 归档分页
+router.get('/archive/page/:pageNum', function (req, res) {
+    let pageNum = req.params.pageNum
+
+    operation.getArchive(pageNum, function (message) {
+        res.render(`archive.html`, {
+            type: 'archive',
+            archive: message[0],
+            year: message[1],
+            totalPages: message[2],
+            pageNum: pageNum,
+            route: '/archive'
         })
     })
 })
@@ -91,11 +136,34 @@ router.get('/tag', function (req, res) {
 router.get('/tag/:id', function (req, res) {
     // 获取标签 id
     let id = req.params.id
-    operation.getArticleT(id, function (message) {
+
+    operation.getArticleT(id, 1, function (message) {
         res.render(`archive.html`, {
             type: 'article_t',
             mes: message[0],
-            belong: message[1][0]
+            belong: message[1][0],
+            totalPages: message[2],
+            pageNum: 1,
+            route: '/tag/' + id
+        })
+    })
+})
+
+// 标签文章分页
+router.get('/tag/:id/page/:pageNum', function (req, res) {
+    // 获取标签 id
+    let id = req.params.id
+    // 获取页码
+    let pageNum = req.params.pageNum
+
+    operation.getArticleT(id, pageNum, function (message) {
+        res.render(`archive.html`, {
+            type: 'article_t',
+            mes: message[0],
+            belong: message[1][0],
+            totalPages: message[2],
+            pageNum: pageNum,
+            route: '/tag/' + id
         })
     })
 })
@@ -103,12 +171,15 @@ router.get('/tag/:id', function (req, res) {
 // 跳转关于页面
 router.get('/about', function (req, res) {
     // 跳转到指定文章
-    fs.readFile('./views/index.html', 'utf8', function (err, data) {
-        if (err) {
-            return res.status(500).send('error')
-        } else {
-            res.end(data)
-        }
+    operation.getOneArticle(1, function (message) {
+        res.render('article.html', {
+            topic: message[0][0].article_topic,
+            content: message[0][0].article_content,
+            date: message[0][0].article_date,
+            className: message[0][0].class_name,
+            class_id: message[0][0].class_id,
+            tags: message[1],
+        });
     })
 })
 
