@@ -1,56 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/public.css">
-    <link rel="stylesheet" href="/css/article.css">
-    <link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css" />
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="/node_modules/editor.md/editormd.min.js"></script>
-</head>
-<body>
-    <div>
-        <div class="header">
-            <div class="header-inner">
-                <ul class="nav">
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/classify">分类</a></li>
-                    <li><a href="/archive">归档</a></li>
-                    <li><a href="/tag">标签</a></li>
-                    <li><a href="/about">关于</a></li>
-                </ul>
+{{ extend './layout.html' }}
+
+{{ block 'head' }}
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/public.css">
+<link rel="stylesheet" href="/css/article.css">
+<link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css" />
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/editor.md/editormd.min.js"></script>
+{{ /block }}
+
+{{ block 'content' }}
+<div class="article">
+    <div class="article-inner">
+        <h1 class="article-topic">{{ topic }}</h1>
+        <div class="article-message">
+            <span class="time">{{ date }}</span>
+            <span class="Class">收录于 <a href="/classify/{{ class_id }}">{{ className }}</a> 分类</span>
+            <div class="tag-nav">
+                {{ each tags }}
+                <a href="/tag/{{ $value.tag_id }}" class="tag">{{ $value.tag_name }}</a>
+                {{ /each }}
             </div>
         </div>
-
-        <div class="article">
-            <div class="article-inner">
-                <h1 class="article-topic">{{ topic }}</h1>
-                <div class="article-message">
-                    <span class="time">{{ date }}</span>
-                    <span class="Class">收录于 <a href="/article/01">{{ className }}</a> 分类</span>
-                    <div class="tag-nav">
-                        {{ each tags }}
-                        <a href="/tag/{{ $value.tag_id }}" class="tag">{{ $value.tag_name }}</a>
-                        {{ /each }}
-                    </div>
-                </div>
-                <div class="article-content" id="md">
-                    {{@ content }}
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-
+        <div class="article-content" id="md">
+            {{@ content }}
         </div>
     </div>
+</div>
+{{ /block }}
 
-    <script>
-        // 将 html 字符串以 markdown 格式显示
-        $('#md').addClass('markdown-body editormd-html-preview')
-    </script>
-</body>
-</html>
+{{ block 'etc' }}
+<script>
+    // 将 html 字符串以 markdown 格式显示
+    $('#md').addClass('markdown-body editormd-html-preview')
+</script>
+{{ /block }}
