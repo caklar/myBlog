@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,4 +33,19 @@
         </div>
     </div>
 </body>
-</html>
+</html> -->
+{{ extend './layout.html'}}
+
+{{ block 'head' }}
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/public.css">
+<link rel="stylesheet" href="/css/tag.css">
+{{ /block }}
+
+{{ block 'content' }}
+<div class="tag">
+    {{ each tag }}
+        <a href="/tag/{{ $value.tag_id }}" class="tips">{{ $value.tag_name }}</a>
+    {{ /each }}
+</div>
+{{ /block }}

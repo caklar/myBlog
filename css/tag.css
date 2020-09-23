@@ -6,6 +6,7 @@
 }
 
 .tips {
+    display: inline-block;
     margin: 0 6px 6px;
     border-bottom: 1px dotted #555;
     color: #555;
