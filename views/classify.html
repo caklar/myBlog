@@ -1,38 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/public.css">
-    <link rel="stylesheet" href="/css/classify.css">
-</head>
-<body>
-    <div>
-        <div class="header">
-            <div class="header-inner">
-                <ul class="nav">
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/classify">分类</a></li>
-                    <li><a href="/archive">归档</a></li>
-                    <li><a href="/tag">标签</a></li>
-                    <li><a href="/about">关于</a></li>
-                </ul>
-            </div>
-        </div>
+{{ extend './layout.html' }}
 
-        <div class="classify">
-            <ul>
-                {{ each class_info }}
-                    <li><a href="/classify/{{ $value.class_id }}" class="entry">{{ $value.class_name }}</a></li>
-                {{ /each }}
-            </ul>
-        </div>
+{{ block 'head' }}
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/public.css">
+<link rel="stylesheet" href="/css/classify.css">
+{{ /block}}
 
-        <div class="footer">
-
-        </div>
-    </div>
-</body>
-</html>
+{{ block 'content' }}
+<div class="classify">
+    <ul>
+        {{ each class_info }}
+            <li><a href="/classify/{{ $value.class_id }}" class="entry">{{ $value.class_name }}</a></li>
+        {{ /each }}
+    </ul>
+</div>
+{{ /block}}
