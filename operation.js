@@ -55,6 +55,7 @@ exports.getArticlePage = function (pageNum, callback) {
     start = (pageNum - 1) * 10
     // 查询文章信息及其分类
     const onePage = `SELECT article.*,classify.class_name FROM article,classify WHERE article.class_id=classify.class_id ORDER BY article_date DESC LIMIT ` + start + `,` + 10
+    // 查询文章总数
     const totalPage = `SELECT COUNT(article_id) AS pageCount FROM article`
     const sql = onePage + `;` + totalPage
     
@@ -94,17 +95,29 @@ exports.getClass = function (pageNum, callback) {
 }
 
 // 获取分类对应文章
-exports.getArticleC = function (id, callback) {
+exports.getArticleC = function (id, pageNum, callback) {
+    // 根据分页获取数据范围
+    start = (pageNum - 1) * 20
     // 根据分类 id 按时间倒序查询对应文章
-    const article = `SELECT article_id,article_date,article_topic FROM article WHERE class_id=` + id + ` ORDER BY article_date DESC`
+    const article = `SELECT article_id,article_date,article_topic FROM article WHERE class_id=` + id + ` ORDER BY article_date DESC LIMIT ` + start + `,` + 20
     // 查询分类名称
     const className = `SELECT class_name FROM classify WHERE class_id=` + id
-    const sql = article + `;` + className
+    // 查询分类对应的文章总数
+    const count = `SELECT COUNT(article_id) AS count FROM article WHERE class_id=` + id
+    const sql = article + `;` + className + `;` + count
 
     query(sql, function (err, res) {
         if (err) {
             console.log(err.message)
         } else {
+            let page = res[2][0].count
+            page = page % 20 == 0 ? page / 20 : Math.ceil(page / 20)
+            // 将页数转换为数组，方便前端模板渲染
+            const totalPages = []
+            for (let i = 0; i < page; i++) {
+                totalPages.push(i)
+            }
+            res[2] = totalPages
             callback(res)
             // console.log(res)
         }
@@ -114,17 +127,27 @@ exports.getArticleC = function (id, callback) {
 // 获取归档信息
 exports.getArchive = function (pageNum, callback) {
     // 根据分页获取数据范围
-    start = (pageNum - 1) * 10
+    start = (pageNum - 1) * 20
     // 按时间倒序查询归档信息
     const getArchive = `SELECT article_id,article_topic,article_date FROM article ORDER BY article_date DESC LIMIT ` + start + `,` + 20 
     // 获取年份信息
-    const getYear = `SELECT left(article_date,4) as years FROM article WHERE article_date GROUP BY left(article_date,4)`
-    sql = getArchive + ';' + getYear
+    const getYear = `SELECT left(article_date,4) as years FROM (` + getArchive + `) AS A WHERE article_date GROUP BY left(article_date,4)`
+    // 获取文章总数
+    const count = `SELECT COUNT(article_id) AS count FROM article`
+    sql = getArchive + ';' + getYear + `;` + count
 
     query(sql, function (err, res) {
         if (err) {
             console.log(err.message)
         } else {
+            let page = res[2][0].count
+            page = page % 20 == 0 ? page / 20 : Math.ceil(page / 20)
+            // 将页数转换为数组，方便前端模板渲染
+            const totalPages = []
+            for (let i = 0; i < page; i++) {
+                totalPages.push(i)
+            }
+            res[2] = totalPages
             // console.log(res)
             callback(res)
         }
@@ -146,17 +169,29 @@ exports.getTag = function (callback) {
 }
 
 // 获取标签对应文章
-exports.getArticleT = function (id, callback) {
+exports.getArticleT = function (id, pageNum, callback) {
+    // 根据分页获取数据范围
+    start = (pageNum - 1) * 20
     // 根据标签 id 按时间倒序查询对应文章
-    const article = `SELECT article.article_id,article_date,article_topic FROM article,a_t,tag WHERE article.article_id=a_t.article_id AND tag.tag_id=a_t.tag_id AND tag.tag_id=` + id + ` ORDER BY article_date DESC`
+    const article = `SELECT article.article_id,article_date,article_topic FROM article,a_t,tag WHERE article.article_id=a_t.article_id AND tag.tag_id=a_t.tag_id AND tag.tag_id=` + id + ` ORDER BY article_date DESC LIMIT ` + start + `,` + 20
     // 查询标签名称
     const tagName = `SELECT tag_name FROM tag WHERE tag_id=` + id
-    const sql = article + `;` + tagName
+    // 查询标签对应的文章总数
+    const count = `SELECT COUNT(a_t.article_id) AS count FROM article,a_t,tag WHERE article.article_id=a_t.article_id AND tag.tag_id=a_t.tag_id AND tag.tag_id=` + id
+    const sql = article + `;` + tagName + `;` + count
     
     query(sql, function (err, res) {
         if (err) {
             console.log(err.message)
         } else {
+            let page = res[2][0].count
+            page = page % 20 == 0 ? page / 20 : Math.ceil(page / 20)
+            // 将页数转换为数组，方便前端模板渲染
+            const totalPages = []
+            for (let i = 0; i < page; i++) {
+                totalPages.push(i)
+            }
+            res[2] = totalPages
             callback(res)
             // console.log(res)
         }
