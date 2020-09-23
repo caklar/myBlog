@@ -1,69 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/public.css">
-    <link rel="stylesheet" href="/css/archive.css">
-</head>
-<body>
-    <div>
-        <div class="header">
-            <div class="header-inner">
-                <ul class="nav">
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/classify">分类</a></li>
-                    <li><a href="/archive">归档</a></li>
-                    <li><a href="/tag">标签</a></li>
-                    <li><a href="/about">关于</a></li>
-                </ul>
-            </div>
-        </div>
+{{ extend './layout.html' }}
 
-        <div class="archive">
-            <div class="archive-inner">
-                {{ if type == 'archive' }}
-                {{ each year t }}
-                <h1>{{ t.years }}</h1>
-                <ul>
-                    {{ each archive mes }}
-                    {{ if mes.article_date.slice(0,4) == t.years }}
-                    <li>
-                        <a href="/article/{{ mes.article_id }}" class="title"><span class="time">{{ mes.article_date }}</span>{{ mes.article_topic }}</a>
-                    </li>
-                    {{ /if }}
-                    {{ /each }}
-                </ul>
-                {{ /each }}
-                {{ else if type == 'article_c' }}
-                <h1>{{ belong.class_name }}</h1>
-                <span>分类</span>
-                <ul>
-                    {{ each mes }}
-                    <li>
-                        <a href="/article/{{ $value.article_id }}" class="title"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a>
-                    </li>
-                    {{ /each }}
-                </ul>
-                {{ else if type == 'article_t'}}
-                <h1>{{ belong.tag_name }}</h1>
-                <span>标签</span>
-                <ul>
-                    {{ each mes }}
-                    <li>
-                        <a href="/article/{{ $value.article_id }}" class="title"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a>
-                    </li>
-                    {{ /each }}
-                </ul>
-                {{ /if }}
-            </div>
-        </div>
+{{ block 'head' }}
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/public.css">
+<link rel="stylesheet" href="/css/archive.css">
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/archive.js"></script>
+{{ /block }}
 
-        <div class="footer">
-
-        </div>
+{{ block 'content' }}
+<div class="archive">
+    <div class="archive-inner">
+        {{ if type == 'archive' }}
+        {{ each year t }}
+        <h1>{{ t.years }}</h1>
+        <ul>
+            {{ each archive mes }}
+            {{ if mes.article_date.slice(0,4) == t.years }}
+            <li>
+                <a href="/article/{{ mes.article_id }}" class="title"><span class="time">{{ mes.article_date }}</span>{{ mes.article_topic }}</a>
+            </li>
+            {{ /if }}
+            {{ /each }}
+        </ul>
+        {{ /each }}
+        {{ else if type == 'article_c' }}
+        <h1>{{ belong.class_name }}</h1>
+        <span>分类</span>
+        <ul>
+            {{ each mes }}
+            <li>
+                <a href="/article/{{ $value.article_id }}" class="title"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a>
+            </li>
+            {{ /each }}
+        </ul>
+        {{ else if type == 'article_t'}}
+        <h1>{{ belong.tag_name }}</h1>
+        <span>标签</span>
+        <ul>
+            {{ each mes }}
+            <li>
+                <a href="/article/{{ $value.article_id }}" class="title"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a>
+            </li>
+            {{ /each }}
+        </ul>
+        {{ /if }}
     </div>
-</body>
-</html>
+    <div class="paging">
+        <ul class="paging-inner">
+            <li><a href="{{ route }}" id="first">&lt;&lt;</a></li>
+            <li><a href="" id="prev">&lt;</a></li>
+            {{ if pageNum > 5 }}
+            <li><a href="" class="page">1</a></li>
+            <li>···</li>
+            {{ /if }}
+            {{ each totalPages }}
+                {{ if $value + 1 == pageNum }}
+                <li><a href="" class="currentPage page">{{ $value + 1 }}</a></li>
+                {{ else }}
+                    {{ if pageNum > 5 && $value > 4 }}
+                        {{ if $value == pageNum || $value == pageNum - 2 }}
+                            <li><a href="" class="page">{{ $value + 1 }}</a></li>
+                        {{ /if }}
+                    {{ else }}
+                        {{ if $value > pageNum }}
+                        {{ else }}
+                            <li><a href="" class="page">{{ $value + 1 }}</a></li>
+                        {{ /if }}
+                    {{ /if }}
+                {{ /if }}
+            {{ /each }}
+            {{ if totalPages.length - pageNum > 2 }}
+                <li>···</li>
+                <li><a href="" class="page">{{ totalPages.length }}</a></li>
+            {{ else if totalPages.length - pageNum == 2 }}
+                <li><a href="" class="page">{{ totalPages.length }}</a></li>
+            {{ /if }}
+            <li><a href="" id="next">&gt;</a></li>
+            <li><a href="" id="last">&gt;&gt;</a></li>
+        </ul>
+    </div>
+</div>
+{{ /block }}

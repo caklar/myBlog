@@ -61,3 +61,43 @@
     margin-right: 48px;
     font-size: 12px;
 }
+
+.paging {
+    width: 600px;
+    margin: 96px auto 0;
+    text-align: center;
+}
+
+.paging-inner {
+    border-top: 1px solid #e3e3e3;
+}
+
+.paging-inner li {
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    margin: 0 5px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.paging-inner a {
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    border-top: 1px solid #e3e3e3;
+    color: #555;
+    transition: border-top 0.2s linear;
+}
+
+.paging-inner a:hover {
+    border-top: 1px solid #555;
+}
+
+.paging-inner .currentPage {
+    pointer-events: none;
+    background-color: #e3e3e3;
+    color: #888;
+}
