@@ -1,91 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/public.css">
-    <link rel="stylesheet" href="/css/homePage.css">
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="/js/index.js"></script>
-</head>
-<body>
-    <div>
-        <div class="header">
-            <div class="header-inner">
-                <ul class="nav">
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/classify">分类</a></li>
-                    <li><a href="/archive">归档</a></li>
-                    <li><a href="/tag">标签</a></li>
-                    <li><a href="/about">关于</a></li>
-                </ul>
+{{extend './layout.html'}}
+
+{{ block 'head' }}
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/public.css">
+<link rel="stylesheet" href="/css/homePage.css">
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+{{ /block }}
+
+{{ block 'content' }}
+<div class="main">
+    <div class="content">
+        <div class="article-nav">
+            {{ each article }}
+            <div class="article-nav-inner">
+                <h1><a href="/article/{{ $value.article_id }}" class="topic">{{ $value.article_topic }}</a></h1>
+                <p class="article-nav-content">{{ $value.article_content }}</p>
+                <a href="/article/{{ $value.article_id }}" class="more">阅读全文 >></a>
             </div>
+            {{ /each }}
         </div>
-
-        <div class="main">
-            <div class="content">
-                <div class="article-nav">
-                    {{ each article }}
-                    <div class="article-nav-inner">
-                        <h1 class="topic">{{ $value.article_topic }}</h1>
-                        <p class="article-nav-content">{{ $value.article_content }}</p>
-                        <a href="/article/{{ $value.article_id }}" class="more">阅读全文 >></a>
-                    </div>
-                    {{ /each }}
-                </div>
-                
-                <div class="message">
-                    <img src="" alt="" class="head-image">
-                    <p class="intro">123</p>
-                    <div class="link">
-                        <a href="">1</a>
-                        <a href="">2</a>
-                        <a href="">3</a>
-                    </div>
-                </div>
+        
+        <div class="message">
+            <img src="" alt="" class="head-image">
+            <p class="intro">1111111111111111111111111111111111111111111111111111111111111111</p>
+            <div class="link">
+                <a href="">123</a>
+                <a href="">223</a>
+                <a href="">323</a>
             </div>
-
-            <div class="paging">
-                <ul class="paging-inner">
-                    <li><a href="" id="first">&lt;&lt;</a></li>
-                    <li><a href="" id="prev">&lt;</a></li>
-                    {{ if pageNum > 5 }}
-                    <li><a href="" class="page">1</a></li>
-                    <li>···</li>
-                    {{ /if }}
-                    {{ each totalPages }}
-                        {{ if $value + 1 == pageNum }}
-                        <li><a href="" class="currentPage page">{{ $value + 1 }}</a></li>
-                        {{ else }}
-                            {{ if pageNum > 5 && $value > 4 }}
-                                {{ if $value == pageNum || $value == pageNum - 2 }}
-                                    <li><a href="" class="page">{{ $value + 1 }}</a></li>
-                                {{ /if }}
-                            {{ else }}
-                                {{ if $value > pageNum }}
-                                {{ else }}
-                                    <li><a href="" class="page">{{ $value + 1 }}</a></li>
-                                {{ /if }}
-                            {{ /if }}
-                        {{ /if }}
-                    {{ /each }}
-                    {{ if totalPages.length - pageNum > 2 }}
-                        <li>···</li>
-                        <li><a href="" class="page">{{ totalPages.length }}</a></li>
-                    {{ else if totalPages.length - pageNum == 2 }}
-                        <li><a href="" class="page">{{ totalPages.length }}</a></li>
-                    {{ /if }}
-                    <li><a href="" id="next">&gt;</a></li>
-                    <li><a href="" id="last">&gt;&gt;</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer">
-            
         </div>
     </div>
-</body>
-</html>
+
+    <div class="paging">
+        <ul class="paging-inner">
+            <li><a href="" id="first">&lt;&lt;</a></li>
+            <li><a href="" id="prev">&lt;</a></li>
+            {{ if pageNum > 5 }}
+            <li><a href="" class="page">1</a></li>
+            <li>···</li>
+            {{ /if }}
+            {{ each totalPages }}
+                {{ if $value + 1 == pageNum }}
+                <li><a href="" class="currentPage page">{{ $value + 1 }}</a></li>
+                {{ else }}
+                    {{ if pageNum > 5 && $value > 4 }}
+                        {{ if $value == pageNum || $value == pageNum - 2 }}
+                            <li><a href="" class="page">{{ $value + 1 }}</a></li>
+                        {{ /if }}
+                    {{ else }}
+                        {{ if $value > pageNum }}
+                        {{ else }}
+                            <li><a href="" class="page">{{ $value + 1 }}</a></li>
+                        {{ /if }}
+                    {{ /if }}
+                {{ /if }}
+            {{ /each }}
+            {{ if totalPages.length - pageNum > 2 }}
+                <li>···</li>
+                <li><a href="" class="page">{{ totalPages.length }}</a></li>
+            {{ else if totalPages.length - pageNum == 2 }}
+                <li><a href="" class="page">{{ totalPages.length }}</a></li>
+            {{ /if }}
+            <li><a href="" id="next">&gt;</a></li>
+            <li><a href="" id="last">&gt;&gt;</a></li>
+        </ul>
+    </div>
+</div>
+{{ /block }}
