@@ -1,10 +1,21 @@
 .article {
+    width: 790px;
+    margin: 0 auto;
+    padding-bottom: 96px;
+}
+
+.article-inner {
     width: 700px;
-    margin: 96px auto;
+    min-height: 478px;
+    padding: 45px;
+    border-radius: 10px;
+    background-color: #fff;
 }
 
 .article-topic {
+    width: 100%;
     text-align: center;
+    word-wrap: break-word;
 }
 
 .article-message {
@@ -12,6 +23,22 @@
     text-align: center;
     color: #888;
 }
+
+.article-content {
+    position: relative;
+    padding: 10px 0 0 0 !important;
+}
+
+/* .article-content::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 700px;
+    height: 2px;
+    background-color: #e3e3e3;
+    z-index: 999;
+} */
 
 .time {
     margin-right: 10px;
@@ -27,6 +54,10 @@
     color: #555;
 }
 
+.revise-date {
+    margin-left: 10px;
+}
+
 .tag-nav {
     margin-top: 10px;
 }
@@ -35,7 +66,7 @@
     position: relative;
     display: inline-block;
     padding: 2px 5px 2px 8px;
-    margin: 0 10px 0 15px;
+    margin: 5px 10px 5px 15px;
     border: 1px solid #e3e3e3;
     border-left-color: transparent;
     font-size: 12px;

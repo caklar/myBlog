@@ -3,10 +3,14 @@
 {{ block 'head' }}
 <link rel="stylesheet" href="/css/index.css">
 <link rel="stylesheet" href="/css/public.css">
+<link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css">
 <link rel="stylesheet" href="/css/article.css">
-<link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css" />
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/top.js"></script>
 <script src="/node_modules/editor.md/editormd.min.js"></script>
+<script src="/node_modules/editor.md/lib/marked.min.js"></script>
+<script src="/node_modules/editor.md/lib/prettify.min.js"></script>
 {{ /block }}
 
 {{ block 'content' }}
@@ -16,6 +20,9 @@
         <div class="article-message">
             <span class="time">{{ date }}</span>
             <span class="Class">收录于 <a href="/classify/{{ class_id }}">{{ className }}</a> 分类</span>
+            {{ if revise != null }}
+                <span class="revise-date">修改于 {{ revise }}</span>
+            {{ /if }}
             <div class="tag-nav">
                 {{ each tags }}
                 <a href="/tag/{{ $value.tag_id }}" class="tag">{{ $value.tag_name }}</a>
@@ -27,11 +34,15 @@
         </div>
     </div>
 </div>
+
+{{ include './top.html' }}
+
 {{ /block }}
 
 {{ block 'etc' }}
 <script>
     // 将 html 字符串以 markdown 格式显示
-    $('#md').addClass('markdown-body editormd-html-preview')
+    editormd.markdownToHTML("md");
+    // $('#md').addClass('markdown-body editormd-html-preview')
 </script>
 {{ /block }}
