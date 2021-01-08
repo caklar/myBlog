@@ -1,7 +1,20 @@
+body {
+    background: #fff;
+}
+
 .classify {
     width: 600px;
-    margin: 96px auto;
-    /* border-top: 1px solid #e3e3e3; */
+    margin: 64px auto;
+    padding-bottom: 164px;
+    /* border-radius: 10px; */
+    /* background-color: #fff; */
+}
+
+.count {
+    width: 100%;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #000;
 }
 
 .entry {

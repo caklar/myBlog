@@ -8,6 +8,7 @@
 
 {{ block 'content' }}
 <div class="classify">
+    <p class="count">共计 {{ count }} 个分类</p>
     <ul>
         {{ each class_info }}
             <li><a href="/classify/{{ $value.class_id }}" class="entry">{{ $value.class_name }}</a></li>
