@@ -14,6 +14,7 @@ $(function () {
         }
         $(this).siblings('label').css('color', '#999')
     })
+    
     // 登录
     $('#sign').on('click', function () {
         let username = $('#username').val()
