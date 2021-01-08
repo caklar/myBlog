@@ -4,15 +4,17 @@
 }
 
 body {
+    /* height: 100%; */
     font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 14px;
     line-height: 2;
     color: #555;
-    background: #fff;
+    /* background: #f4f4f4; */
 }
 
 a {
     text-decoration: none;
+    color: #555;
 }
 
 ul {
@@ -31,4 +33,20 @@ textarea {
 
 button {
     outline: none;
+}
+
+thead td {
+    font-weight: bold;
+}
+
+td {
+    border-bottom: 1px solid #e3e3e3;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    min-height: 100%;
+    height: auto !important;
 }
