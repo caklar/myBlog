@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/articleOps.css">
+    <link rel="stylesheet" href="/css/page.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/js/page.js"></script>
+    <script src="/js/articleOps.js"></script>
+</head>
+<body>
+    <div class="container">
+        <table class="article-t">
+            <thead>
+                <td>序号</td>
+                <td>标题</td>
+                <td>分类</td>
+                <td>标签</td>
+                <td>时间</td>
+                <td>操作</td>
+            </thead>
+            <tbody>
+                {{ each articleMes mes }}
+                <tr>
+                    <td>{{ mes.article_id }}</td>
+                    <td>{{ mes.article_topic }}</td>
+                    <td>{{ mes.class_name }}</td>
+                    <td>
+                        {{ each tagMes tag }}
+                            {{ if mes.article_id == tag.article_id }}
+                                <span>{{ tag.tag_name }}</span>
+                            {{ /if }}
+                        {{ /each }}
+                    </td>
+                    <td class="time">{{ mes.article_date }}</td>
+                    <td>
+                        <a href="/articleRevise/article/{{ mes.article_id }}" style="color: blue;">修改</a>
+                        <a href="javascript:;" style="color: red;" class="delete">删除</a>
+                    </td>
+                </tr>
+                {{ /each }}
+            </tbody>
+        </table>
+
+        {{ if articleMes.length > 20 }}
+            {{ include './page.html' }}
+        {{ /if }}
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+.empty {
+    border: none;
+    color: #555;
+    font-size: 16px;
+}
+
+.article-t {
+    table-layout: fixed;
+    width: 1200px;
+    /* min-height: 600px; */
+    margin: 0 auto;
+    padding-bottom: 200px;
+}
+
+.article-t td {
+    padding: 10px 15px;
+    /* word-wrap: break-word; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* border: 1px solid #e3e3e3; */
+}
+
+.article-t td:nth-child(2) {
+    width: 250px;
+}
+
+.article-t a {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.bottom {
+    position: absolute;
+    left: 460px;
+    bottom: 64px;
+}
