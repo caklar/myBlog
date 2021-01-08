@@ -12,11 +12,17 @@
   "dependencies": {
     "art-template": "^4.13.2",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "echarts": "^5.0.0",
     "editor.md": "^1.5.0",
     "express": "^4.17.1",
     "express-art-template": "^1.0.1",
+    "highlight.js": "^10.5.0",
     "jquery": "^3.5.1",
+    "marked": "^1.2.7",
+    "multiparty": "^4.2.2",
     "mysql": "^2.18.1",
-    "mysql-queries": "^0.2.0"
+    "mysql-queries": "^0.2.0",
+    "silly-datetime": "^0.1.2"
   }
 }
