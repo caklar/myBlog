@@ -1,0 +1,47 @@
+{{ extend './layout.html' }}
+
+{{ block 'head' }}
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/public.css">
+<link rel="stylesheet" href="/css/page.css">
+<link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css">
+<link rel="stylesheet" href="/css/articleSearch.css">
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/editor.md/editormd.min.js"></script>
+<script src="/js/homePage.js"></script>
+<script src="/js/top.js"></script>
+{{ /block}}
+
+{{ block 'content' }}
+<div class="result">
+    <div class="search">
+        <input type="text" class="search-input" id="search-input" placeholder="请输入文章关键字">
+        <a href="" class="search-btn" id="search-btn">搜索</a>
+    </div>
+    <p class="count">共计 {{ count }} 篇文章</p>
+    <div class="article-nav">
+        {{ each article }}
+        <div class="article-nav-inner">
+            <h1><a href="/article/{{ $value.article_id }}" class="topic">{{ $value.article_topic }}</a></h1>
+            <p class="article-nav-mes">
+                <span class="time">{{ $value.article_date }}</span>
+                <span class="class">收录于 <a href="/classify/{{ $value.class_id }}">{{ $value.class_name }}</a> 分类</span>
+            </p>
+            <div class="article-nav-content">{{@ $value.article_content }}</div>
+            <a href="/article/{{ $value.article_id }}" class="more">阅读全文 >></a>
+        </div>
+        {{ /each }}
+    </div>
+</div>
+
+{{ include './top.html' }}
+
+{{ /block}}
+
+{{ block 'etc' }}
+<script>
+    // 将 html 字符串以 markdown 格式显示
+    $('.article-nav-content').addClass('markdown-body editormd-html-preview')
+</script>
+{{ /block }}
