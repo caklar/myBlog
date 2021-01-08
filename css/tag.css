@@ -1,13 +1,24 @@
+body {
+    background: #fff;
+}
+
 .tag {
     width: 600px;
-    margin: 96px auto;
+    margin: 64px auto;
     /* border-top: 1px solid #e3e3e3; */
     text-align: center;
 }
 
+.count {
+    width: 100%;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #000;
+}
+
 .tips {
     display: inline-block;
-    margin: 0 6px 6px;
+    margin: 0 15px 20px;
     border-bottom: 1px dotted #555;
     color: #555;
     font-size: 16px;
