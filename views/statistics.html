@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/statistics.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/_echarts@5.0.0@echarts/dist/echarts.min.js"></script>
+    <script src="/js/statistics.js"></script>
+</head>
+<body>
+    <div class="statistics">
+        <!-- 为后端提供数据，不显示 -->
+        <p id="date" style="display: none;">{{ weeklyDate }}</p>
+        <p id="count" style="display: none;">{{ weeklyCount }}</p>
+
+        <div class="count">
+            <div>
+                <p id="clickCount" class="clickCount">{{ totalCount }}</p>
+                <p>总点击量</p>
+            </div>
+            <div>
+                <p id="vistors" class="visitors">{{ visitorCount }}</p>
+                <p>总访客数</p>
+            </div>
+        </div>
+        <div class="most">
+            <p>最多点击</p>
+            <ul class="sort">
+                {{ each articleSort }}
+                    <li>
+                        <a href="/article/{{ $value.article_id }}" class="topic">{{ $value.article_topic }}</a>
+                        <span class="bar"></span>
+                        <span class="articlecount">{{ $value.clickcount }}</span>
+                    </li>
+                {{ /each }}
+            </ul>
+        </div>
+        <div class="weekly" id="weekly"></div>
+    </div>
+</body>
+</html>
