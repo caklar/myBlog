@@ -1,7 +1,19 @@
+body {
+    background: #fff;
+}
+
 .archive {
     width: 700px;
-    margin: 96px auto 96px;
+    margin: 64px auto 96px;
+    padding-bottom: 164px;
     /* border-top: 1px solid #e3e3e3; */
+}
+
+.count {
+    width: 100%;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #000;
 }
 
 .archive-inner {
@@ -29,9 +41,20 @@
     color: #888;
 }
 
+.archive-mes {
+    display: inline-block;
+    max-width: 600px;
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .title {
     position: relative;
     display: inline-block;
+    height: 28px;
+    /* max-width: 600px; */
     margin: 10px 0;
     border-bottom: 1px dotted #555;
     color: #555;
@@ -51,6 +74,7 @@
     border-radius: 50%;
     border: 1px solid #fff;
     background-color: #999;
+    /* z-index: 999; */
 }
 
 .title:hover::before {
@@ -60,44 +84,4 @@
 .time {
     margin-right: 48px;
     font-size: 12px;
-}
-
-.paging {
-    width: 600px;
-    margin: 96px auto 0;
-    text-align: center;
-}
-
-.paging-inner {
-    border-top: 1px solid #e3e3e3;
-}
-
-.paging-inner li {
-    display: inline-block;
-    width: 30px;
-    height: 40px;
-    margin: 0 5px;
-    line-height: 40px;
-    text-align: center;
-}
-
-.paging-inner a {
-    position: relative;
-    top: -1px;
-    display: inline-block;
-    width: 30px;
-    height: 40px;
-    border-top: 1px solid #e3e3e3;
-    color: #555;
-    transition: border-top 0.2s linear;
-}
-
-.paging-inner a:hover {
-    border-top: 1px solid #555;
-}
-
-.paging-inner .currentPage {
-    pointer-events: none;
-    background-color: #e3e3e3;
-    color: #888;
 }

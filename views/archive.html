@@ -4,12 +4,14 @@
 <link rel="stylesheet" href="/css/index.css">
 <link rel="stylesheet" href="/css/public.css">
 <link rel="stylesheet" href="/css/archive.css">
+<link rel="stylesheet" href="/css/page.css">
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/js/archive.js"></script>
+<script src="/js/page.js"></script>
 {{ /block }}
 
 {{ block 'content' }}
 <div class="archive">
+    <p class="count">共计 {{ count }} 篇文章</p>
     <div class="archive-inner">
         {{ if type == 'archive' }}
         {{ each year t }}
@@ -18,7 +20,7 @@
             {{ each archive mes }}
             {{ if mes.article_date.slice(0,4) == t.years }}
             <li>
-                <a href="/article/{{ mes.article_id }}" class="title"><span class="time">{{ mes.article_date }}</span>{{ mes.article_topic }}</a>
+                <p class="title"><a href="/article/{{ mes.article_id }}" class="archive-mes"><span class="time">{{ mes.article_date }}</span>{{ mes.article_topic }}</a></p>
             </li>
             {{ /if }}
             {{ /each }}
@@ -30,7 +32,7 @@
         <ul>
             {{ each mes }}
             <li>
-                <a href="/article/{{ $value.article_id }}" class="title"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a>
+                <p class="title"><a href="/article/{{ $value.article_id }}" class="archive-mes"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a></p>
             </li>
             {{ /each }}
         </ul>
@@ -40,45 +42,16 @@
         <ul>
             {{ each mes }}
             <li>
-                <a href="/article/{{ $value.article_id }}" class="title"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a>
+                <p class="title"><a href="/article/{{ $value.article_id }}" class="archive-mes"><span class="time">{{ $value.article_date }}</span>{{ $value.article_topic }}</a></p>
             </li>
             {{ /each }}
         </ul>
         {{ /if }}
     </div>
-    <div class="paging">
-        <ul class="paging-inner">
-            <li><a href="{{ route }}" id="first">&lt;&lt;</a></li>
-            <li><a href="" id="prev">&lt;</a></li>
-            {{ if pageNum > 5 }}
-            <li><a href="" class="page">1</a></li>
-            <li>···</li>
-            {{ /if }}
-            {{ each totalPages }}
-                {{ if $value + 1 == pageNum }}
-                <li><a href="" class="currentPage page">{{ $value + 1 }}</a></li>
-                {{ else }}
-                    {{ if pageNum > 5 && $value > 4 }}
-                        {{ if $value == pageNum || $value == pageNum - 2 }}
-                            <li><a href="" class="page">{{ $value + 1 }}</a></li>
-                        {{ /if }}
-                    {{ else }}
-                        {{ if $value > pageNum }}
-                        {{ else }}
-                            <li><a href="" class="page">{{ $value + 1 }}</a></li>
-                        {{ /if }}
-                    {{ /if }}
-                {{ /if }}
-            {{ /each }}
-            {{ if totalPages.length - pageNum > 2 }}
-                <li>···</li>
-                <li><a href="" class="page">{{ totalPages.length }}</a></li>
-            {{ else if totalPages.length - pageNum == 2 }}
-                <li><a href="" class="page">{{ totalPages.length }}</a></li>
-            {{ /if }}
-            <li><a href="" id="next">&gt;</a></li>
-            <li><a href="" id="last">&gt;&gt;</a></li>
-        </ul>
-    </div>
+    
+    {{ if count > 20 }}
+            {{ include './page.html' }}
+    {{ /if }}
+
 </div>
 {{ /block }}
