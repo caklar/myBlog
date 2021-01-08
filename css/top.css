@@ -1,0 +1,21 @@
+.top {
+    position: fixed;
+    display: none;
+    right: 200px;
+    bottom: 150px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #999;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #999;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.top:hover {
+    border-color: #555;
+    color: #555;
+}
