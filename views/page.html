@@ -1,0 +1,34 @@
+<div class="paging bottom">
+    <ul class="paging-inner">
+        <li><a href="{{ route }}" id="first">&lt;&lt;</a></li>
+        <li><a href="" id="prev">&lt;</a></li>
+        {{ if pageNum > 5 }}
+        <li><a href="" class="page">1</a></li>
+        <li>···</li>
+        {{ /if }}
+        {{ each totalPages }}
+            {{ if $value + 1 == pageNum }}
+            <li><a href="" class="currentPage page">{{ $value + 1 }}</a></li>
+            {{ else }}
+                {{ if pageNum > 5 }}
+                    {{ if $value == pageNum - 1 || $value == pageNum - 2 || $value == pageNum - 3 }}
+                        <li><a href="" class="page">{{ $value + 1 }}</a></li>
+                    {{ /if }}
+                {{ else }}
+                    {{ if $value > pageNum }}
+                    {{ else }}
+                        <li><a href="" class="page">{{ $value + 1 }}</a></li>
+                    {{ /if }}
+                {{ /if }}
+            {{ /if }}
+        {{ /each }}
+        {{ if totalPages.length - pageNum > 2 }}
+            <li>···</li>
+            <li><a href="" class="page">{{ totalPages.length }}</a></li>
+        {{ else if totalPages.length - pageNum == 2 }}
+            <li><a href="" class="page">{{ totalPages.length }}</a></li>
+        {{ /if }}
+        <li><a href="" id="next">&gt;</a></li>
+        <li><a href="" id="last">&gt;&gt;</a></li>
+    </ul>
+</div>
