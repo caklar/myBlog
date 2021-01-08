@@ -8,48 +8,35 @@
     <link rel="stylesheet" href="/css/newArticle.css">
     <link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css">
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-
+    <script src="/node_modules/editor.md/editormd.min.js"></script>
+    <script src="/js/newArticle.js"></script>
 </head>
 <body>
     <div>
-        <form action="/newArticle" method="POST">
+        <form action="">
             <div class="new-message">
                 <div class="new-topic">
                     <span>标题</span>
-                    <input type="text" placeholder="在此输入标题" name="topic">
+                    <input type="text" placeholder="在此输入标题" id="topic">
                 </div>
                 <div class="new-classify">
                     <span>分类</span>
-                    <input type="text" name="classify">
+                    <input type="text" id="classify">
                 </div>
                 <div class="new-tag">
                     <span>标签</span>
-                    <input type="text" placeholder="在此输入标签,多个标签以半角逗号隔开" name="tag">
+                    <input type="text" placeholder="在此输入标签,多个标签以半角逗号隔开" id="tag">
                 </div>
             </div>
             
             <div id="editor">
-                <textarea style="display:none;">
-        
-                </textarea>
+                <textarea style="display:none;" id="md"></textarea>
             </div>
             
             <div class="opt">
-                <input type="submit" class="btn" value="确认发表">
+                <input type="submit" class="btn" id="btn" value="确认发表">
             </div>
         </form>
     </div>
-
-    <script src="/node_modules/editor.md/editormd.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            var editor = editormd("editor", {
-                width  : "90%",
-                height : "530px",
-                path   : "../node_modules/editor.md/lib/",
-                saveHTMLToTextarea : true
-            });
-        });
-    </script>
 </body>
 </html>
