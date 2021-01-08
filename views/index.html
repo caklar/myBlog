@@ -1,70 +1,63 @@
-{{extend './layout.html'}}
+{{ extend './layout.html' }}
 
 {{ block 'head' }}
 <link rel="stylesheet" href="/css/index.css">
 <link rel="stylesheet" href="/css/public.css">
 <link rel="stylesheet" href="/css/homePage.css">
+<link rel="stylesheet" href="/css/page.css">
+<link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/icon/fontello-0e93c4d4/css/fontello.css">
+<link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css" />
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+<script src="/node_modules/editor.md/editormd.min.js"></script>
+<script src="/js/page.js"></script>
+<script src="/js/top.js"></script>
+<script src="/js/homePage.js"></script>
 {{ /block }}
 
 {{ block 'content' }}
 <div class="main">
     <div class="content">
+        <div class="search">
+            <input type="text" class="search-input" id="search-input" placeholder="请输入文章关键字">
+            <a href="" class="search-btn" id="search-btn">搜索</a>
+        </div>
         <div class="article-nav">
             {{ each article }}
             <div class="article-nav-inner">
                 <h1><a href="/article/{{ $value.article_id }}" class="topic">{{ $value.article_topic }}</a></h1>
-                <p class="article-nav-content">{{ $value.article_content }}</p>
+                <p class="article-nav-mes">
+                    <span class="time">{{ $value.article_date }}</span>
+                    <span class="class">收录于 <a href="/classify/{{ $value.class_id }}">{{ $value.class_name }}</a> 分类</span>
+                </p>
+                <div class="article-nav-content">{{@ $value.article_content }}</div>
                 <a href="/article/{{ $value.article_id }}" class="more">阅读全文 >></a>
             </div>
             {{ /each }}
         </div>
         
         <div class="message">
-            <img src="" alt="" class="head-image">
-            <p class="intro">1111111111111111111111111111111111111111111111111111111111111111</p>
+            <img src="/image/{{ mes.img }}" alt="" class="head-image">
+            <p class="name">{{ mes.name }}</p>
+            <p class="intro">{{ mes.intro }}</p>
             <div class="link">
-                <a href="">123</a>
-                <a href="">223</a>
-                <a href="">323</a>
+                <a href="{{ mes.link1 }}" title="微博"><i class="icon-weibo"></i></a>
+                <a href="{{ mes.link2 }}" title="github"><i class="icon-github-circled"></i></a>
+                <span title="{{ mes.link3 }}"><i class="icon-mail-alt"></i></span>
             </div>
         </div>
     </div>
 
-    <div class="paging">
-        <ul class="paging-inner">
-            <li><a href="" id="first">&lt;&lt;</a></li>
-            <li><a href="" id="prev">&lt;</a></li>
-            {{ if pageNum > 5 }}
-            <li><a href="" class="page">1</a></li>
-            <li>···</li>
-            {{ /if }}
-            {{ each totalPages }}
-                {{ if $value + 1 == pageNum }}
-                <li><a href="" class="currentPage page">{{ $value + 1 }}</a></li>
-                {{ else }}
-                    {{ if pageNum > 5 && $value > 4 }}
-                        {{ if $value == pageNum || $value == pageNum - 2 }}
-                            <li><a href="" class="page">{{ $value + 1 }}</a></li>
-                        {{ /if }}
-                    {{ else }}
-                        {{ if $value > pageNum }}
-                        {{ else }}
-                            <li><a href="" class="page">{{ $value + 1 }}</a></li>
-                        {{ /if }}
-                    {{ /if }}
-                {{ /if }}
-            {{ /each }}
-            {{ if totalPages.length - pageNum > 2 }}
-                <li>···</li>
-                <li><a href="" class="page">{{ totalPages.length }}</a></li>
-            {{ else if totalPages.length - pageNum == 2 }}
-                <li><a href="" class="page">{{ totalPages.length }}</a></li>
-            {{ /if }}
-            <li><a href="" id="next">&gt;</a></li>
-            <li><a href="" id="last">&gt;&gt;</a></li>
-        </ul>
-    </div>
+    {{ include './top.html' }}
+
+    {{ include './page.html' }}
+
 </div>
+{{ /block }}
+
+{{ block 'etc' }}
+<script>
+    // 将 html 字符串以 markdown 格式显示
+    $('.article-nav-content').addClass('markdown-body editormd-html-preview')
+</script>
 {{ /block }}

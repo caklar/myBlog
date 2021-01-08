@@ -1,20 +1,70 @@
 .main {
     width: 1420px;
-    margin: 96px auto 96px;
-    /* border-top: 1px solid #e3e3e3; */
+    margin: 48px auto 96px;
+    padding-bottom: 164px;
+    /* background-color: #fff; */
+}
+
+.search {
+    position: relative;
+    width: 700px;
+    margin: 0 auto 48px;
+    text-align: center;
+}
+
+.search-input {
+    width: 500px;
+    height: 24px;
+    /* margin-right: 20px; */
+    padding: 5px 70px 5px 15px;
+    border: 1px solid #e3e3e3;
+    color: #999;
+    line-height: 24px;
+}
+
+.search-btn {
+    display: inline-block;
+    position: absolute;
+    top: -2px;
+    right: 53px;
+    width: 70px;
+    height: 38px;
+    background-color: #e3e3e3;
+    text-align: center;
+    line-height: 38px;
+}
+
+.search-input:hover, .search-input:focus {
+    border: 1px solid #555;
+    color: #555;
 }
 
 .article-nav {
     float: left;
-    width: 800px;
-    margin-left: 192px;
-    /* border-top: 1px solid gray; */
+    width: 700px;
+    margin-left: 262px;
+    padding-top: 32px;
+    padding-right: 10px;
+    padding-bottom: 32px;
+    border-radius: 10px;
+    background-color: #fff;
 }
 
 .article-nav-inner {
-    margin-left: 100px;
-    margin-bottom: 64px;
+    position: relative;
+    margin-left: 64px;
+    margin-bottom: 32px;
     padding: 18px 36px;
+}
+
+.article-nav-inner::after {
+    content: "";
+    position: absolute;
+    bottom: -16px;
+    left: -5px;
+    width: 600px;
+    height: 1px;
+    background-color: #e3e3e3;
 }
 
 /* .article-nav-inner:hover {
@@ -25,10 +75,40 @@
 .topic {
     position: relative;
     display: inline-block;
-    margin-bottom: 24px;
+    max-width: 550px;
+    height: 41.6px;
+    /* margin-bottom: 12px; */
     line-height: 1.5em;
     color: #555;
     word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.article-nav-mes {
+    margin-bottom: 12px;
+}
+
+.time {
+    display: inline-block;
+    margin-right: 20px;
+    color: #999;
+    font-size: 12px;
+}
+
+.class {
+    display: inline-block;
+    color: #999;
+    font-size: 12px;
+}
+
+.class a {
+    border-bottom: 1px dotted #999;
+}
+
+.class a:hover {
+    border-bottom: 1px solid #555;
 }
 
 .topic::after {
@@ -47,16 +127,23 @@
 }
 
 .article-nav-content{
-    margin-bottom: 24px;
+    max-height: 200px;
+    margin-bottom: 48px;
+    padding: 20px 0 !important;
+    overflow: hidden;
+}
+
+.markdown-body, editormd-html-preview {
+    overflow: hidden !important;
 }
 
 .more {
     padding-bottom: 5px;
-    border-bottom: 1px solid #777;
+    border-bottom: 1px dotted #777;
     color: #777;
 }
 
-.more:hover{
+.more:hover {
     border-bottom: 1px solid #555;
     color: #555;
 }
@@ -64,19 +151,25 @@
 .message {
     float: right;
     width: 256px;
-    height: 256px;
-    margin-right: 64px;
+    margin-right: 36px;
     padding: 32px;
-    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #fff;
     line-height: 1.5;
     text-align: center;
 }
 
 .head-image {
-    width: 56px;
-    height: 56px;
+    width: 100px;
+    height: 100px;
     margin-top: 16px;
-    border: 1px solid black;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 8px 5px 8px #e3e3e3;
+}
+
+.name {
+    margin: 20px;
 }
 
 .intro {
@@ -85,52 +178,13 @@
     word-break: break-word;
 }
 
-.link a {
+.link a, .link span {
     margin: 0 5px;
     color: #555;
+    font-size: 16px;
 }
 
 .content {
     /* margin-bottom: 96px; */
     overflow: hidden;
-}
-
-.paging {
-    width: 600px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.paging-inner {
-    border-top: 1px solid #e3e3e3;
-}
-
-.paging-inner li {
-    display: inline-block;
-    width: 30px;
-    height: 40px;
-    margin: 0 5px;
-    line-height: 40px;
-    text-align: center;
-}
-
-.paging-inner a {
-    position: relative;
-    top: -1px;
-    display: inline-block;
-    width: 30px;
-    height: 40px;
-    border-top: 1px solid #e3e3e3;
-    color: #555;
-    transition: border-top 0.2s linear;
-}
-
-.paging-inner a:hover {
-    border-top: 1px solid #555;
-}
-
-.paging-inner .currentPage {
-    pointer-events: none;
-    background-color: #e3e3e3;
-    color: #888;
 }
