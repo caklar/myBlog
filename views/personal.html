@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/personal.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/js/personal.js"></script>
+</head>
+<body>
+    <div class="personal">
+        <form id="mymes" enctype="multipart/form-data">
+            <div>
+                <div class="head-profile">
+                    <img src="/image/{{ mes.img }}" alt="" id="headImage">
+                    <a href="javascript:;" class="myfile">选择图片</a>
+                    <input type="file" id="image" name="image" accept="image/png,image/jpeg,image/gif">
+                    <input type="text" id="default" value="{{ mes.img }}" name="default" style="display: none;">
+                </div>
+                <div class="self-intro">
+                    <div class="item">
+                        <label for="name">昵称</label>
+                        <input type="text" value="{{ mes.name }}" id="name" name="name">
+                    </div>
+                    <div class="item">
+                        <label for="profile">简介</label>
+                        <textarea name="intro" id="profile" cols="30" rows="10">{{ mes.intro }}</textarea>
+                    </div>
+                    <div class="item">
+                        <label for="link1">微博</label>
+                        <input type="text" value="{{ mes.link1 }}" id="link1" name="link1">
+                    </div>
+                    <div class="item">
+                        <label for="link2">github</label>
+                        <input type="text" value="{{ mes.link2 }}" id="link2" name="link2">
+                    </div>
+                    <div class="item">
+                        <label for="link3">email</label>
+                        <input type="text" value="{{ mes.link3 }}" id="link3" name="link3">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="button" class="save" id="save" value="保存">
+                <a href="/manage" class="cancel">取消</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
