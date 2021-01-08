@@ -1,11 +1,20 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background: #f3f3f3;
+}
+
 .header {
     width: 100%;
     height: 96px;
-    background-color: #e3e3e3;
+    background-color: #e8e8e8;
 }
 
 .header-inner {
-    width: 600px;
+    width: 750px;
     margin: 0 auto;
     padding: 32px 0;
 }
@@ -16,12 +25,12 @@
 
 .nav li {
     float: left;
-    margin: 0 33px;
+    margin: 0 30px;
 }
 
 .nav a {
     display: inline-block;
-    padding: 0 10px;
+    padding: 0 15px;
     font-size: 16px;
     color: #555;
     text-align: center;
@@ -29,11 +38,15 @@
 }
 
 .nav a:hover {
-    background-color: #bbb;
+    background-color: #d0d0d0;
 }
 
 .footer {
+    position: absolute;
+    bottom: 0;
     width: 100%;
     height: 96px;
+    /* margin-top: 48px; */
     background-color: #e3e3e3;
+    clear: both;
 }
