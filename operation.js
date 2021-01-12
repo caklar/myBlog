@@ -31,7 +31,7 @@ exports.newArticle = function (article, classify, tag) {
     function InsertA () {
         const promise2 = new Promise(function (resolve, reject) {
             // 插入文章信息
-            const insert_a = `INSERT INTO article(article_topic,article_content,article_date,article_contentmd,article_del,class_id) VALUES(?,?,?,?,'0',(SELECT class_id FROM classify WHERE class_name='` + classify + `'),'0')`
+            const insert_a = `INSERT INTO article(article_topic,article_content,article_date,article_contentmd,article_del,class_id,clickcount) VALUES(?,?,?,?,'0',(SELECT class_id FROM classify WHERE class_name='` + classify + `'),'0')`
             query(insert_a, article, function (err, res) {
                 if (err) {
                     reject('error')
@@ -52,7 +52,7 @@ exports.newArticle = function (article, classify, tag) {
             })
             query(sql, function (err, res) {
                 if (err) {
-                    console.log(err.message)
+                    reject('error')
                 }
             })
             resolve('success')
@@ -69,7 +69,7 @@ exports.newArticle = function (article, classify, tag) {
             })
             query(sql, function (err, res) {
                 if (err) {
-                    console.log(err.message)
+                    reject('error')
                 }
             })
             resolve('success')
